@@ -1,0 +1,16 @@
+# Go modules raised to their latest release (same major version) before building
+# pufferpanel. A module is only touched if the binary already depends on it.
+golang.org/x/crypto
+golang.org/x/net
+golang.org/x/text
+golang.org/x/mod
+golang.org/x/sys
+golang.org/x/oauth2
+golang.org/x/sync
+golang.org/x/image
+github.com/go-git/go-git/v5
+github.com/go-git/go-billy/v5
+github.com/klauspost/compress
+github.com/golang-jwt/jwt/v5
+google.golang.org/protobuf
+google.golang.org/grpc
