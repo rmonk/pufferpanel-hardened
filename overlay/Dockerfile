@@ -88,5 +88,8 @@ LABEL org.opencontainers.image.title="pufferpanel (hardened)" \
 WORKDIR /var/lib/pufferpanel
 USER ${PP_UID}:${PP_GID}
 EXPOSE 8080 5657
+# Upstream's image has no health check; the web UI must answer (after `db upgrade` on start).
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+  CMD curl -fsS -o /dev/null http://127.0.0.1:8080/ || exit 1
 # `db upgrade` exits 9 when there is nothing to do.
 ENTRYPOINT ["tini", "--", "sh", "-c", "pufferpanel db upgrade; rc=$?; [ $rc -eq 0 ] || [ $rc -eq 9 ] || exit $rc; exec pufferpanel run"]
