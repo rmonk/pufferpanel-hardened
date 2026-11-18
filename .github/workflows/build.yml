@@ -115,7 +115,7 @@ jobs:
         run: |
           skopeo inspect --raw "docker://$IMAGE:latest-hardened" \
             | jq -e '.mediaType == "application/vnd.docker.distribution.manifest.v2+json"' >/dev/null
-          skopeo inspect --config "docker://$IMAGE:latest-hardened" | jq -e '.config.Healthcheck.Test' >/dev/null
+          skopeo inspect --raw --config "docker://$IMAGE:latest-hardened" | jq -e '.config.Healthcheck.Test' >/dev/null
 
       - name: Ping Healthchecks.io
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && env.HC_PING_URL != ''
